@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title></title>
+</head>
+<body>
+&lt;?php<br>
+require_once(&#39;connect.php&#39;); <br>
+session_start();<br>
+?&gt;<br>
+&lt;!DOCTYPE html&gt;<br>
+&lt;html&gt;<br>
+&lt;head&gt;<br>
+    &lt;meta charset=&quot;utf&ndash;10&quot;&gt;<br>
+    &lt;title&gt;Apartment ABC Login&lt;/title&gt;<br>
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;<br>
+    &lt;link rel=&quot;icon&quot; href=&quot;appartment.png&quot;&gt;<br>
+    &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,600&amp;family=Sacramento&amp;family=Sriracha&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src=&quot;https://kit.fontawesome.com/a076d05399.js&quot;&gt;&lt;/script&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src=&quot;https://cdn.jsdelivr.net/npm/sweetalert2@10&quot;&gt;&lt;/script&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;script src=&quot;sweetalert2.all.min.js&quot;&gt;&lt;/script&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;script src=&#39;https://www.google.com/recaptcha/api.js&#39;&gt;&lt;/script&gt;<br>
+&lt;/head&gt;<br>
+<br>
+&lt;body&gt;<br>
+<br>
+&lt;h1&gt;Apartment ABC&lt;/h1&gt;<br>
+<br>
+&lt;?php<br>
+if(isset($_POST[&#39;reset&#39;])){<br>
+&nbsp;&nbsp;&nbsp;$spassword=$_POST[&#39;spassword&#39;];<br>
+&nbsp;&nbsp;&nbsp;$spassword=md5($spassword);<br>
+&nbsp;&nbsp;&nbsp;$staff_id=$_POST[&#39;staff_id&#39;];<br>
+&nbsp;&nbsp;&nbsp;$q=&quot;UPDATE staff SET spassword=&#39;$spassword&#39; WHERE staff_id=&#39;$staff_id&#39;&quot;;<br>
+&nbsp;&nbsp;&nbsp;$result = $mysqli&ndash;&gt;query($q); <br>
+&nbsp;&nbsp;&nbsp;if($result){<br>
+&nbsp;&nbsp;&nbsp;?&gt;<br>
+&lt;script&gt;<br>
+Swal.fire(<br>
+  &#39;Successfully reseted&#39;,<br>
+  &#39;&#39;,<br>
+  &#39;success&#39;<br>
+)<br>
+&lt;/script&gt;<br>
+&lt;?php<br>
+&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+?&gt;<br>
+<br>
+&lt;div&gt;<br>
+&lt;h2&gt;Login&lt;/h2&gt;<br>
+&lt;div class=&quot;g&ndash;recaptcha&quot; data&ndash;sitekey=6LcWKqwaAAAAAJ9pRLz4Kv&ndash;xcysPsK9zIdqFjOiI&gt;&lt;/div&gt;<br>
+<br>
+&lt;?php<br>
+<br>
+unset($_SESSION[&#39;staff_id&#39;]);<br>
+unset($_SESSION[&#39;department&#39;]);<br>
+unset($_SESSION[&#39;position&#39;]);<br>
+unset($_SESSION[&#39;email&#39;]);<br>
+unset($_SESSION[&#39;passwd&#39;]);<br>
+<br>
+if(isset($_GET[&#39;error&#39;])){<br>
+echo &quot;&lt;h4 style=&#39;color: red;&#39;&gt;Incorrect username or password&lt;h4&gt;&quot;;<br>
+}<br>
+?&gt;<br>
+  &lt;form class=&quot;loginout&quot; action=&quot;logincheck.php&quot; method=&quot;POST&quot;&gt;<br>
+  		&lt;input placeholder=&quot;Email&quot; type=&quot;text&quot; name=&quot;email&quot; id=&quot;title&quot; size=&quot;30&quot; &gt; &lt;br&gt;<br>
+  		&lt;input placeholder=&quot;Password&quot; type=&quot;password&quot; name=&quot;passwd&quot; cols=&quot;15&quot; rows=&quot;1&quot; &gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;h3&gt;&lt;a href=&quot;reset.php&quot;&gt;Reset password&lt;/a&gt;&lt;/h3&gt;&lt;br&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input style=&quot;background&ndash;color: #52575D; color: #FDDB3A; width: 200px; font&ndash;size:20px;&quot; type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;Login&quot;&gt;&lt;br&gt;&lt;br&gt;<br>
+  &lt;/form&gt;<br>
+&lt;/div&gt;<br>
+<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;</body></html>
